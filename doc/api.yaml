@@ -76,7 +76,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/User"
+                  $ref: '#/components/schemas/User'
         401:
           $ref: '#/components/responses/UnauthorizedError'
     post:
@@ -109,7 +109,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: '#/components/schemas/User'
         400:
           description: Bad request
         401:
@@ -133,7 +133,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: '#/components/schemas/User'
         401:
           $ref: '#/components/responses/UnauthorizedError'
         404:
@@ -168,7 +168,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: '#/components/schemas/User'
         400:
           description: Bad request
         401:
@@ -201,7 +201,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Board"
+                  $ref: '#/components/schemas/Board'
         401:
           $ref: '#/components/responses/UnauthorizedError'
     post:
@@ -242,7 +242,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Board"
+                $ref: '#/components/schemas/Board'
         400:
           description: Bad request
         401:
@@ -265,7 +265,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Board"
+                $ref: '#/components/schemas/Board'
         401:
           $ref: '#/components/responses/UnauthorizedError'
         404:
@@ -312,7 +312,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Board"
+                $ref: '#/components/schemas/Board'
         400:
           description: Bad request
         401:
@@ -352,7 +352,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Task"
+                  $ref: '#/components/schemas/Task'
         401:
           $ref: '#/components/responses/UnauthorizedError'
 
@@ -397,7 +397,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Task"
+                $ref: '#/components/schemas/Task'
         400:
           description: Bad request
         401:
@@ -426,7 +426,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Task"
+                $ref: '#/components/schemas/Task'
         401:
           $ref: '#/components/responses/UnauthorizedError'
     put:
@@ -469,7 +469,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Task"
+                $ref: '#/components/schemas/Task'
         400:
           description: Bad request
         401:
@@ -492,8 +492,7 @@ paths:
     post:
       tags:
         - Login
-      security:
-        []
+      security: []
       summary: Login
       description: Logins a user and returns a JWT-token
       requestBody:
