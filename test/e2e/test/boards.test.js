@@ -191,7 +191,6 @@ describe('Boards suite', () => {
             .then(response => expect(response.body.boardId).to.equal(boardId))
         )
       );
-      // Test:
       await request
         .delete(routes.boards.delete(boardId))
         .then(response => expect(response.status).oneOf([200, 204]));

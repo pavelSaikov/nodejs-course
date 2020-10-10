@@ -1,4 +1,5 @@
 const User = require('./user.models');
+const taskService = require('../boards/tasks/task.service');
 
 let USERS = [
   new User({ name: 'user1' }),
@@ -36,6 +37,18 @@ const deleteUser = async id => {
   }
 
   USERS = newUsers;
+
+  const tasks = await taskService.getAllTasks();
+  await Promise.all(
+    tasks.map(t => {
+      if (t.userId === id) {
+        return taskService.updateTask(t.boardId, t.id, { ...t, userId: null });
+      }
+
+      return Promise.resolve();
+    })
+  );
+
   return true;
 };
 

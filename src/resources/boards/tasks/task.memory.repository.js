@@ -15,7 +15,6 @@ const getById = async (boardId, id) => {
 
 const addTask = async (boardId, newTask) => {
   const newTaskObj = new Task({ ...newTask, boardId });
-
   TASKS.push(newTaskObj);
   return newTaskObj;
 };

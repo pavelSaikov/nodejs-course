@@ -1,9 +1,13 @@
 const router = require('express').Router();
+const morgan = require('morgan');
+
 const User = require('./user.models');
 const usersService = require('./user.service');
+const { CUSTOM_TOKENS } = require('../../log/log.models');
 
 router
   .route('/')
+  .all(morgan(`:method :url :${CUSTOM_TOKENS.params} :${CUSTOM_TOKENS.body}`))
   .get(async (req, res) => {
     const users = await usersService.getAll();
 
@@ -24,6 +28,7 @@ router
 
 router
   .route('/:id')
+  .all(morgan(`:method :url :${CUSTOM_TOKENS.params} :${CUSTOM_TOKENS.body}`))
   .get(async (req, res) => {
     const users = await usersService.getAll();
 
