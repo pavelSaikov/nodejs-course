@@ -16,6 +16,8 @@ router
   .get(async (req, res) => {
     const boards = await boardsService.getAllBoards();
 
+    console.log('boards: ', boards);
+
     res.json(boards);
   })
   .post(async (req, res) => {

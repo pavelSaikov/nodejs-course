@@ -14,6 +14,10 @@ process.on('uncaughtException', e =>
 
 process.on('unhandledRejection', error => {
   console.log('Unhandled Rejection: ', error.message ? error.message : '');
+<<<<<<< HEAD
+=======
+  console.log(error.stack);
+>>>>>>> 2179b29... feat: implement task 4
 });
 
 const app = express();

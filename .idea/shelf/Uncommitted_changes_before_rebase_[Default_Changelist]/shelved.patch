@@ -1,0 +1,48 @@
+Index: src/app.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>const express = require('express');\nconst swaggerUI = require('swagger-ui-express');\nconst path = require('path');\nconst YAML = require('yamljs');\nconst morgan = require('morgan');\n\nconst userRouter = require('./resources/users/user.router');\nconst boardRouter = require('./resources/boards/board.router');\nconst { CUSTOM_TOKENS, TokensHandlersMap } = require('./log/log.models');\n\nprocess.on('uncaughtException', e =>\n  console.log('Uncaught Exception: ', e.message)\n);\n\nprocess.on('unhandledRejection', error => {\n  console.log('Unhandled Rejection: ', error.message ? error.message : '');\n});\n\nconst app = express();\nconst swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));\n\nmorgan.token(CUSTOM_TOKENS.body, TokensHandlersMap.get(CUSTOM_TOKENS.body));\nmorgan.token(CUSTOM_TOKENS.params, TokensHandlersMap.get(CUSTOM_TOKENS.params));\n\napp.use(express.json());\n\napp.use('/doc', swaggerUI.serve, swaggerUI.setup(swaggerDocument));\n\napp.use('/', (req, res, next) => {\n  if (req.originalUrl === '/') {\n    res.send('Service is running!');\n    return;\n  }\n  next();\n});\n\napp.use('/users', userRouter);\napp.use('/boards', boardRouter);\n\napp.use((err, req, res, _next) => {\n  console.error(`Error: ${err.message}`);\n  res.status(500).send('Internal Server Error');\n});\n\nmodule.exports = app;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/app.js	(revision b655f49e753a54588d3895c64299a0b7377f90a0)
++++ src/app.js	(date 1604239557427)
+@@ -11,7 +11,6 @@
+ process.on('uncaughtException', e =>
+   console.log('Uncaught Exception: ', e.message)
+ );
+-
+ process.on('unhandledRejection', error => {
+   console.log('Unhandled Rejection: ', error.message ? error.message : '');
+ });
+Index: src/server.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>const { PORT } = require('./common/config');\nconst app = require('./app');\nconst { getConnection } = require('./common/db');\n\nconst startServer = async () => {\n  await getConnection();\n\n  app.listen(PORT, () => {\n    console.log(`App is running on http://localhost:${PORT}`);\n  });\n};\n\nstartServer();\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/server.js	(revision b655f49e753a54588d3895c64299a0b7377f90a0)
++++ src/server.js	(date 1603782508614)
+@@ -11,3 +11,21 @@
+ };
+ 
+ startServer();
++
++const fs = require('fs');
++
++const file = fs.createWriteStream('./test.txt');
++
++const drainProcess = () => new Promise(res => file.once('drain', res));
++
++(async function() {
++  for (let i = 0; i <= 1e3; i++) {
++    const isShouldContinue = file.write('Очень большое текст');
++
++    if (!isShouldContinue) {
++      await drainProcess();
++    }
++  }
++
++  file.end('Последнее предложение');
++});

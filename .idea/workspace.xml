@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="544a40fc-df18-466a-a0c0-f489fb49552f" name="Default Changelist" comment="test1" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="test" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1jK7Tma71gQEkrh4Bf93xKDiyzB" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="12.18.2" />
+    <property name="javascript.nodejs.core.library.typings.version" value="12.19.3" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="C:\Users\Admin\Documents\materials\projects\node\nodejs-course\node_modules\prettier" />
+    <property name="run.prettier.on.save" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="544a40fc-df18-466a-a0c0-f489fb49552f" name="Default Changelist" comment="" />
+      <created>1603540939837</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603540939837</updated>
+      <workItem from="1603540940893" duration="793000" />
+      <workItem from="1604237625485" duration="509000" />
+      <workItem from="1604238144398" duration="216000" />
+      <workItem from="1604238369162" duration="3640000" />
+    </task>
+    <task id="LOCAL-00001" summary="test">
+      <created>1604241573124</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1604241573124</updated>
+    </task>
+    <task id="LOCAL-00002" summary="test">
+      <created>1604241626267</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1604241626267</updated>
+    </task>
+    <task id="LOCAL-00003" summary="test1">
+      <created>1604241671308</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1604241671308</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="task-4" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="task-4" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="test" />
+    <MESSAGE value="test1" />
+    <option name="LAST_COMMIT_MESSAGE" value="test1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="838" y="482" width="361" height="197" key="#Custom_Plugin_Repositories" timestamp="1604238473100">
+      <screen x="0" y="0" width="1920" height="1170" />
+    </state>
+    <state x="838" y="482" width="361" height="197" key="#Custom_Plugin_Repositories/-1440.290.1440.870/0.0.1920.1170@0.0.1920.1170" timestamp="1604238473100" />
+    <state x="92" y="92" width="1736" height="986" maximized="true" key="DiffContextDialog" timestamp="1604239557765">
+      <screen x="0" y="0" width="1920" height="1170" />
+    </state>
+    <state x="92" y="92" width="1736" height="986" maximized="true" key="DiffContextDialog/-1440.290.1440.870/0.0.1920.1170@0.0.1920.1170" timestamp="1604239557765" />
+    <state x="739" y="324" key="FileChooserDialogImpl" timestamp="1604240151701">
+      <screen x="0" y="0" width="1920" height="1170" />
+    </state>
+    <state x="739" y="324" key="FileChooserDialogImpl/-1440.290.1440.870/0.0.1920.1170@0.0.1920.1170" timestamp="1604240151701" />
+    <state x="18" y="0" width="1902" height="1164" key="MergeDialog" timestamp="1604241896754">
+      <screen x="0" y="0" width="1920" height="1170" />
+    </state>
+    <state x="18" y="0" width="1902" height="1164" key="MergeDialog/-1440.290.1440.870/0.0.1920.1170@0.0.1920.1170" timestamp="1604241896754" />
+    <state x="598" y="346" key="MultipleFileMergeDialog" timestamp="1604241896759">
+      <screen x="0" y="0" width="1920" height="1170" />
+    </state>
+    <state x="598" y="346" key="MultipleFileMergeDialog/-1440.290.1440.870/0.0.1920.1170@0.0.1920.1170" timestamp="1604241896759" />
+    <state x="706" y="148" key="SettingsEditor" timestamp="1604240984584">
+      <screen x="0" y="0" width="1920" height="1170" />
+    </state>
+    <state x="706" y="148" key="SettingsEditor/-1440.290.1440.870/0.0.1920.1170@0.0.1920.1170" timestamp="1604240984584" />
+    <state x="681" y="326" width="570" height="524" key="StructurePopup" timestamp="1604238850635">
+      <screen x="0" y="0" width="1920" height="1170" />
+    </state>
+    <state x="681" y="326" width="570" height="524" key="StructurePopup/-1440.290.1440.870/0.0.1920.1170@0.0.1920.1170" timestamp="1604238850635" />
+    <state x="552" y="317" key="Vcs.Push.Dialog.v2" timestamp="1604240962455">
+      <screen x="0" y="0" width="1920" height="1170" />
+    </state>
+    <state x="552" y="317" key="Vcs.Push.Dialog.v2/-1440.290.1440.870/0.0.1920.1170@0.0.1920.1170" timestamp="1604240962455" />
+    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup" timestamp="1604240719968">
+      <screen x="0" y="0" width="1920" height="1170" />
+    </state>
+    <state x="623" y="257" width="672" height="678" key="search.everywhere.popup/-1440.290.1440.870/0.0.1920.1170@0.0.1920.1170" timestamp="1604240719968" />
+  </component>
+</project>

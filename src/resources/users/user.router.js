@@ -10,6 +10,7 @@ router
   .all(morgan(`:method :url :${CUSTOM_TOKENS.params} :${CUSTOM_TOKENS.body}`))
   .get(async (req, res) => {
     const users = await usersService.getAll();
+    // console.log('users: ', users);
 
     res.json(users.map(u => User.toResponse(u)));
   })
