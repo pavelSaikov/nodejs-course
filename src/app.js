@@ -12,9 +12,9 @@ process.on('uncaughtException', e =>
   console.log('Uncaught Exception: ', e.message)
 );
 
-process.on('unhandledRejection', error =>
-  console.log('Unhandled Rejection: ', error.message ? error.message : '')
-);
+process.on('unhandledRejection', error => {
+  console.log('Unhandled Rejection: ', error.message ? error.message : '');
+});
 
 const app = express();
 const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));

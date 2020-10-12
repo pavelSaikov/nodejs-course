@@ -1,53 +1,50 @@
+const mongoose = require('mongoose');
+const { MODELS } = require('../../common/db');
+
 const { Board, Column } = require('./board.models');
 
-let BOARDS = [
-  new Board({
-    title: 'board-1',
-    columns: [
-      { title: 'column-1', order: 1 },
-      { title: 'column-2', order: 2 }
-    ]
-  }),
-  new Board({
-    title: 'board-2',
-    columns: [
-      { title: 'column-1', order: 1 },
-      { title: 'column-2', order: 2 }
-    ]
-  })
-];
+const getAllBoards = async () =>
+  mongoose.models[MODELS.BOARD]
+    .find({})
+    .then(boards => boards.map(b => new Board({ ...b.toObject(), id: b.id })));
 
-const getAllBoards = async () => BOARDS;
-
-const getBoardById = async boardId => BOARDS.find(b => b.id === boardId);
+const getBoardById = async boardId => {
+  try {
+    const board = await mongoose.models[MODELS.BOARD].findById(boardId);
+    return new Board({ ...board.toObject(), id: board.id });
+  } catch (e) {
+    return;
+  }
+};
 
 const addBoard = async boardPrototype => {
   const columns = boardPrototype.columns.map(
     ({ title, order }) => new Column({ title, order })
   );
-  const board = new Board({ title: boardPrototype.title, columns });
 
-  BOARDS.push(board);
+  const BoardModel = mongoose.models[MODELS.BOARD];
+  const board = new BoardModel({ title: boardPrototype.title, columns });
+  await board.save();
 
-  return board;
+  return new Board({ ...board.toObject(), id: board.id });
 };
 
 const updateBoard = async updatedBoard => {
-  const otherBoards = BOARDS.filter(b => b.id !== updatedBoard.id);
-  otherBoards.push(updatedBoard);
-  BOARDS = otherBoards;
+  await mongoose.models[MODELS.BOARD].findByIdAndUpdate(
+    updatedBoard.id,
+    updatedBoard
+  );
 
   return updatedBoard;
 };
 
 const deleteBoard = async id => {
-  const newBoardsList = BOARDS.filter(b => b.id !== id);
-
-  if (newBoardsList.length === BOARDS.length) {
+  try {
+    await mongoose.models[MODELS.BOARD].findByIdAndDelete(id);
+  } catch {
     return false;
   }
 
-  BOARDS = newBoardsList;
   return true;
 };
 module.exports = {

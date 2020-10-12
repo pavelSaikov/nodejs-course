@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const morgan = require('morgan');
 
-const User = require('./user.models');
+const { User } = require('./user.models');
 const usersService = require('./user.service');
 const { CUSTOM_TOKENS } = require('../../log/log.models');
 
@@ -11,7 +11,7 @@ router
   .get(async (req, res) => {
     const users = await usersService.getAll();
 
-    res.json(users.map(User.toResponse));
+    res.json(users.map(u => User.toResponse(u)));
   })
   .post(async (req, res) => {
     const { name } = req.body;

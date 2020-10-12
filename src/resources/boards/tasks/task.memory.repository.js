@@ -1,48 +1,58 @@
+const mongoose = require('mongoose');
+
+const { MODELS } = require('../../../common/db');
 const { Task } = require('./task.models');
 
-let TASKS = [];
+const gelAllTasks = async () =>
+  mongoose.models[MODELS.TASK]
+    .find({})
+    .then(tasks => tasks.map(t => new Task({ ...t.toObject(), id: t.id })));
 
-const gelAllTasks = async () => TASKS;
-
-const getAllByBoardId = async boardId => {
-  const searchedTask = TASKS.filter(t => t.boardId === boardId);
-  return searchedTask;
-};
+const getAllByBoardId = async boardId =>
+  mongoose.models[MODELS.TASK]
+    .find({ boardId })
+    .then(tasks => tasks.map(t => new Task({ ...t.toObject(), id: t.id })));
 
 const getById = async (boardId, id) => {
-  return TASKS.find(t => t.id === id && t.boardId === boardId);
+  const result = await mongoose.models[MODELS.TASK].findById(id);
+
+  if (!result) {
+    return result;
+  }
+
+  return new Task({ ...result.toObject(), id: result.id });
 };
 
 const addTask = async (boardId, newTask) => {
-  const newTaskObj = new Task({ ...newTask, boardId });
-  TASKS.push(newTaskObj);
-  return newTaskObj;
+  const TaskModel = mongoose.models[MODELS.TASK];
+
+  const task = new TaskModel({ ...newTask, boardId });
+  await task.save();
+
+  return new Task({ ...task.toObject(), id: task.id });
 };
 
 const updateTask = async (boardId, taskId, updatedTask) => {
-  const editableTask = TASKS.find(t => t.id === taskId);
+  const TaskModel = mongoose.models[MODELS.TASK];
 
-  if (!editableTask) {
+  try {
+    await TaskModel.findByIdAndUpdate(taskId, { ...updatedTask });
+  } catch {
     return;
   }
-
-  const otherTasks = TASKS.filter(t => t.id !== taskId);
-  otherTasks.push({ ...updatedTask, id: taskId });
-  TASKS = otherTasks;
 
   return updatedTask;
 };
 
 const deleteTask = async (boardId, id) => {
-  const positionOfRemovedTask = TASKS.findIndex(
-    t => t.id === id && t.boardId === boardId
-  );
+  const TaskModel = mongoose.models[MODELS.TASK];
 
-  if (positionOfRemovedTask === -1) {
-    return false;
+  try {
+    await TaskModel.findByIdAndRemove(id);
+  } catch {
+    return;
   }
 
-  TASKS = TASKS.filter((v, i) => i !== positionOfRemovedTask);
   return true;
 };
 
