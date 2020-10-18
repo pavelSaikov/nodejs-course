@@ -6,7 +6,11 @@ const morgan = require('morgan');
 
 const userRouter = require('./resources/users/user.router');
 const boardRouter = require('./resources/boards/board.router');
+const loginRouter = require('./resources/login/login.router');
 const { CUSTOM_TOKENS, TokensHandlersMap } = require('./log/log.models');
+const {
+  checkAuthorizationToken
+} = require('./common/check-authorization-token');
 
 process.on('uncaughtException', e =>
   console.log('Uncaught Exception: ', e.message)
@@ -14,10 +18,6 @@ process.on('uncaughtException', e =>
 
 process.on('unhandledRejection', error => {
   console.log('Unhandled Rejection: ', error.message ? error.message : '');
-<<<<<<< HEAD
-=======
-  console.log(error.stack);
->>>>>>> 2179b29... feat: implement task 4
 });
 
 const app = express();
@@ -37,6 +37,10 @@ app.use('/', (req, res, next) => {
   }
   next();
 });
+
+app.use('/login', loginRouter);
+
+app.use(checkAuthorizationToken);
 
 app.use('/users', userRouter);
 app.use('/boards', boardRouter);

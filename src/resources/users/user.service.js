@@ -3,6 +3,8 @@ const tasksService = require('../boards/tasks/task.service');
 
 const getAll = () => usersRepo.getAll();
 
+const getByLogin = login => usersRepo.getByLogin(login);
+
 const addUser = user => usersRepo.addUser(user);
 
 const updateUser = user => usersRepo.updateUser(user);
@@ -24,4 +26,4 @@ const deleteUser = async id => {
   return result;
 };
 
-module.exports = { getAll, addUser, updateUser, deleteUser };
+module.exports = { getAll, getByLogin, addUser, updateUser, deleteUser };

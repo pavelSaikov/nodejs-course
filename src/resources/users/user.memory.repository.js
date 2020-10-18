@@ -1,16 +1,25 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const { User } = require('./user.models');
 const { MODELS } = require('../../common/db');
+const config = require('../../common/config');
 
 const getAll = async () =>
   mongoose.models[MODELS.USER]
     .find({})
     .then(users => users.map(u => new User({ ...u.toObject(), id: u.id })));
 
+const getByLogin = async login =>
+  mongoose.models[MODELS.USER]
+    .find({ login })
+    .then(users => users.map(u => new User({ ...u.toObject(), id: u.id }))[0]);
+
 const addUser = async ({ name, login, password }) => {
   const UserModel = mongoose.models[MODELS.USER];
-  const newUser = new UserModel({ login, name, password });
+
+  const encryptedPassword = await bcrypt.hash(password, config.SALT_ROUNDS);
+  const newUser = new UserModel({ login, name, password: encryptedPassword });
   await newUser.save();
   return new User({ ...newUser.toObject(), id: newUser.id });
 };
@@ -50,18 +59,8 @@ const deleteUser = async id => {
       });
     })
   );
-  // const tasks = await taskService.getAllTasks();
-  // await Promise.all(
-  //   tasks.map(t => {
-  //     if (t.userId === id) {
-  //       return taskService.updateTask(t.boardId, t.id, { ...t, userId: null });
-  //     }
-
-  //     return Promise.resolve();
-  //   })
-  // );
 
   return true;
 };
 
-module.exports = { getAll, addUser, updateUser, deleteUser };
+module.exports = { getAll, getByLogin, addUser, updateUser, deleteUser };
