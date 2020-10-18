@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const morgan = require('morgan');
 
 const boardsService = require('./board.service');
 const tasksService = require('./tasks/task.service');
@@ -8,8 +9,10 @@ const {
   checkIsUpdatedTaskValid
 } = require('./tasks/task.models');
 
+const { CUSTOM_TOKENS } = require('../../log/log.models');
 router
   .route('/')
+  .all(morgan(`:method :url :${CUSTOM_TOKENS.params} :${CUSTOM_TOKENS.body}`))
   .get(async (req, res) => {
     const boards = await boardsService.getAllBoards();
 
@@ -27,9 +30,10 @@ router
   });
 
 router
-  .route('/:id')
+  .route('/:boardId')
+  .all(morgan(`:method :url :${CUSTOM_TOKENS.params} :${CUSTOM_TOKENS.body}`))
   .get(async (req, res) => {
-    const board = await boardsService.getBoardById(req.params.id);
+    const board = await boardsService.getBoardById(req.params.boardId);
 
     if (!board) {
       res.status(404).send('Board not found');
@@ -49,7 +53,7 @@ router
     res.json(updatedBoard);
   })
   .delete(async (req, res) => {
-    const result = await boardsService.deleteBoard(req.params.id);
+    const result = await boardsService.deleteBoard(req.params.boardId);
 
     if (!result) {
       res.status(404).send('Board not found');
@@ -61,8 +65,15 @@ router
 
 router
   .route('/:boardId/tasks')
+  .all(morgan(`:method :url :${CUSTOM_TOKENS.params} :${CUSTOM_TOKENS.body}`))
   .get(async (req, res) => {
     const tasks = await tasksService.getAllByBoardId(req.params.boardId);
+
+    if (!tasks) {
+      res.status(404).send('Not Found');
+      return;
+    }
+
     res.json(tasks);
   })
   .post(async (req, res) => {
@@ -78,6 +89,7 @@ router
 
 router
   .route('/:boardId/tasks/:taskId')
+  .all(morgan(`:method :url :${CUSTOM_TOKENS.params} :${CUSTOM_TOKENS.body}`))
   .get(async (req, res) => {
     const task = await tasksService.getById(
       req.params.boardId,
