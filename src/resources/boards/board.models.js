@@ -1,26 +1,33 @@
-const { v4: uuidv4 } = require('uuid');
+const uuid = require('uuid');
+const mongoose = require('mongoose');
+
+const ColumnSchema = new mongoose.Schema(
+  {
+    id: String,
+    title: { type: String, default: 'column-title' },
+    order: { type: Number, default: 1 }
+  },
+  { _id: false }
+);
+
+const BoardSchema = new mongoose.Schema({
+  title: { type: String, default: 'table-title' },
+  columns: { type: [ColumnSchema], default: [] }
+});
 
 class Column {
-  constructor({ title = 'column-title', order = 1 }) {
-    this.id = uuidv4();
+  constructor({ id = uuid.v4(), title = 'column-title', order = 1 }) {
+    this.id = id;
     this.title = title;
     this.order = order;
-  }
-
-  getId() {
-    return this.id;
   }
 }
 
 class Board {
-  constructor({ title = 'table-title', columns = [] } = {}) {
-    this.id = uuidv4();
+  constructor({ id, title, columns }) {
+    this.id = id;
     this.title = title;
     this.columns = columns;
-  }
-
-  getId() {
-    return this.id;
   }
 }
 
@@ -43,4 +50,10 @@ const checkIsRequestBoardValid = board => {
   return isBoardValid;
 };
 
-module.exports = { Board, Column, checkIsRequestBoardValid };
+module.exports = {
+  BoardSchema,
+  ColumnSchema,
+  Board,
+  Column,
+  checkIsRequestBoardValid
+};

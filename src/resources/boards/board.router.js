@@ -8,8 +8,8 @@ const {
   checkIsNewRequestTaskValid,
   checkIsUpdatedTaskValid
 } = require('./tasks/task.models');
-
 const { CUSTOM_TOKENS } = require('../../log/log.models');
+
 router
   .route('/')
   .all(morgan(`:method :url :${CUSTOM_TOKENS.params} :${CUSTOM_TOKENS.body}`))

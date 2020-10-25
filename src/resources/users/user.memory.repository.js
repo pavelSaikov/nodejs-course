@@ -1,53 +1,65 @@
-const User = require('./user.models');
-const taskService = require('../boards/tasks/task.service');
+const mongoose = require('mongoose');
 
-let USERS = [
-  new User({ name: 'user1' }),
-  new User({ name: 'user2' }),
-  new User({ name: 'user2' })
-];
+const { User } = require('./user.models');
+const { MODELS } = require('../../common/db');
 
-const getAll = async () => USERS;
+const getAll = async () =>
+  mongoose.models[MODELS.USER]
+    .find({})
+    .then(users => users.map(u => new User({ ...u.toObject(), id: u.id })));
 
 const addUser = async ({ name, login, password }) => {
-  const newUser = new User({ login, name, password });
-  USERS.push(newUser);
-  return newUser;
+  const UserModel = mongoose.models[MODELS.USER];
+  const newUser = new UserModel({ login, name, password });
+  await newUser.save();
+  return new User({ ...newUser.toObject(), id: newUser.id });
 };
 
 const updateUser = async ({ id, name, login, password }) => {
-  const otherUsers = USERS.filter(u => u.id !== id);
+  const UserModel = mongoose.models[MODELS.USER];
 
-  if (otherUsers.length === USERS.length) {
+  try {
+    await UserModel.findByIdAndUpdate(id, { name, login, password });
+  } catch {
     return;
   }
 
-  const updatedUser = { id, name, login, password };
-  otherUsers.push(updatedUser);
-  USERS = otherUsers;
-
-  return updatedUser;
+  return new User({ id, name, login, password });
 };
 
 const deleteUser = async id => {
-  const newUsers = USERS.filter(u => u.id !== id);
+  const userModel = mongoose.models[MODELS.USER];
 
-  if (newUsers.length === USERS.length) {
+  try {
+    await userModel.findByIdAndDelete(id);
+  } catch {
     return false;
   }
 
-  USERS = newUsers;
-
-  const tasks = await taskService.getAllTasks();
+  const tasksModel = mongoose.models[MODELS.TASK];
+  const tasks = await tasksModel.find({});
   await Promise.all(
     tasks.map(t => {
-      if (t.userId === id) {
-        return taskService.updateTask(t.boardId, t.id, { ...t, userId: null });
+      if (t.userId !== id) {
+        return Promise.resolve();
       }
 
-      return Promise.resolve();
+      return tasksModel.findByIdAndUpdate(t.id, {
+        ...t.toObject(),
+        userId: null
+      });
     })
   );
+  // const tasks = await taskService.getAllTasks();
+  // await Promise.all(
+  //   tasks.map(t => {
+  //     if (t.userId === id) {
+  //       return taskService.updateTask(t.boardId, t.id, { ...t, userId: null });
+  //     }
+
+  //     return Promise.resolve();
+  //   })
+  // );
 
   return true;
 };
