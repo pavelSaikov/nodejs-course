@@ -6,7 +6,11 @@ const morgan = require('morgan');
 
 const userRouter = require('./resources/users/user.router');
 const boardRouter = require('./resources/boards/board.router');
+const loginRouter = require('./resources/login/login.router');
 const { CUSTOM_TOKENS, TokensHandlersMap } = require('./log/log.models');
+const {
+  checkAuthorizationToken
+} = require('./common/check-authorization-token');
 
 process.on('uncaughtException', e =>
   console.log('Uncaught Exception: ', e.message)
@@ -33,6 +37,10 @@ app.use('/', (req, res, next) => {
   }
   next();
 });
+
+app.use('/login', loginRouter);
+
+app.use(checkAuthorizationToken);
 
 app.use('/users', userRouter);
 app.use('/boards', boardRouter);
